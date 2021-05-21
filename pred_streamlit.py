@@ -106,7 +106,6 @@ def process_data(local_df, cols_input, cols_empty, manual=False):
         local_df['log_'+str(c)] = np.log1p(local_df[c])
 
     # Load trained 'derived averages', TO DO - Load the pivot table directly
-    #previous_trained_local_df = pd.read_csv('./data/azeta_train_derived.csv')
     #previous_trained_local_df = pd.read_csv('./data/azeta_train_derived_v4.tar.xz')
     previous_trained_local_df = load_derived()
 
