@@ -4,3 +4,4 @@ numpy
 cryptography
 sklearn
 plotly
+shap
