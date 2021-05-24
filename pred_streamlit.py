@@ -162,7 +162,7 @@ def process_data(local_df, cols_input, cols_empty, manual=False):
 def get_model():
     # Model
     model = catboost.CatBoostRegressor()
-    model.load_model('./data/azeta_gpu_dump_real_v9')
+    model.load_model('./data/azeta_gpu_dump_real_gs')
     return model
 
 
@@ -286,7 +286,8 @@ def main_task():
     st.plotly_chart(fig, use_container_width=True)
     shap_values = model.get_feature_importance(
         data=test_data,
-        type='ShapValues'
+        type='ShapValues',
+        shap_calc_type='Approximate'
     )
     #sp_shape = shap_values.shape
     #st.text(shap_values)
