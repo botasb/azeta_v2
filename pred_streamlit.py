@@ -23,7 +23,7 @@ def st_shap(plot, height=None):
     components.html(shap_html, height=height)
 
 
-@st.cache(ttl=1800)
+@st.cache(ttl=600)
 def load_derived():
     #return pd.read_csv('./data/azeta_train_derived_v4.tar.xz')
     return pd.read_csv('./data/azeta_train_derived_v5_before_train.tar.xz').rename(columns={'azeta_train_derived_v5_before_train.csv':'Libro'})
@@ -31,7 +31,7 @@ def load_derived():
 
 
 
-@st.cache(ttl=1800)
+@st.cache(ttl=600)
 def process_data(local_df, cols_input, cols_empty, manual=False):
     local_df.rename(columns=mes_columns_dict, inplace=True)
 
@@ -158,7 +158,7 @@ def process_data(local_df, cols_input, cols_empty, manual=False):
     return local_df
 
 
-@st.cache(ttl=1800)
+@st.cache(ttl=600)
 def get_model():
     # Model
     model = catboost.CatBoostRegressor()
@@ -166,11 +166,11 @@ def get_model():
     return model
 
 
-@st.cache(allow_output_mutation=True, ttl=1800)
+@st.cache(allow_output_mutation=True, ttl=600)
 def get_sample(df, num):
     return df.sample(num).reset_index(drop=True)
 
-@st.cache(ttl=1800)
+@st.cache(ttl=600)
 def load_data(key):
     #os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
 
@@ -213,17 +213,17 @@ def load_data(key):
     'proveedores':proveedores, 'materias':materias, 'colecciones':colecciones
     }
 
-@st.cache(ttl=1800)
+@st.cache(ttl=600)
 def get_pool(data, labels, cat_f):
     return Pool(data, labels, cat_features=cat_f)
 
 
-@st.cache(ttl=1800)
+@st.cache(ttl=600)
 def predict(model, data):
     return model.predict(data)
 
 
-@st.cache(suppress_st_warning=True,hash_funcs={catboost.core.Pool: lambda _: None}, ttl=900)
+@st.cache(suppress_st_warning=True,hash_funcs={catboost.core.Pool: lambda _: None}, ttl=600)
 def main_task():
 
     # Process
