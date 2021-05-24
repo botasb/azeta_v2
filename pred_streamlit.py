@@ -166,7 +166,7 @@ def get_model():
     return model
 
 
-@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True, ttl=1800)
 def get_sample(df, num):
     return df.sample(num).reset_index(drop=True)
 
@@ -223,7 +223,7 @@ def predict(model, data):
     return model.predict(data)
 
 
-@st.cache(suppress_st_warning=True,hash_funcs={catboost.core.Pool: lambda _: None}, ttl=900))
+@st.cache(suppress_st_warning=True,hash_funcs={catboost.core.Pool: lambda _: None}, ttl=900)
 def main_task():
 
     # Process
